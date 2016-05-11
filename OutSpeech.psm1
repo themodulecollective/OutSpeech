@@ -7,11 +7,10 @@ inspired by https://learn-powershell.net/2013/12/04/give-powershell-a-voice-usin
     Author: Mike Campbell
     DateCreated: 2016-05-07
 #>
-##ToDo: Add a Set-Speech function for persistent changes to the Speech object for voice, rate, volume, etc.
 ##ToDo: Make the -voice parameter of each function that has it a dynamic parameter with currently installed voices or add validation within the function for voice specified
-##ToDo: Allow multiple speech configuration objects for different configurations beyond just Speech and ExportSpeech
 ##ToDo: Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
 ##ToDo: Add inline documentation to functions
+##ToDo: Add support for SSML: https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
 ###############################################################################################
 #Module Variables and Variable Functions
 ###############################################################################################
