@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+RootModule = 'OutSpeech.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.1.0'
@@ -33,7 +33,7 @@ Copyright = '2018'
 Description = 'Module provides an Out-Speech function along with related configuration functions'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+# PowerShellVersion = '2.0.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -69,7 +69,7 @@ ProcessorArchitecture = 'None'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = @('Disable-Speech','Enable-Speech','Export-Speech','Get-InstalledVoice','Get-OutSpeechVariable','Get-OutSpeechVariableValue','Initialize-Speech','New-OutSpeechVariable','Out-Speech','Remove-OutSpeechVariable','Set-OutSpeechVariable','Set-Speech')
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -120,4 +120,3 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-
