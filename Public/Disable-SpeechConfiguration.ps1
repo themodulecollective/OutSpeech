@@ -20,21 +20,39 @@ Function Disable-SpeechConfiguration
     .PARAMETER ConfigurationName
     The name of an existing SpeechConfiguration to Disable (delete).
     #>
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'NamedConfig')]
     param
     (
-        [Parameter()]
+        [Parameter(ParameterSetName = 'NamedConfig')]
         [string[]]$ConfigurationName
+        ,
+        [Parameter(ParameterSetName = 'All')]
+        [switch]$All
     )
-    foreach ($cn in $ConfigurationName){
-        if ($Script:SpeechConfigurations.ContainsKey($cn))
+    switch ($PSCmdlet.ParameterSetName)
+    {
+        'NamedConfig'
         {
-            $Script:SpeechConfigurations.$cn.dispose()
-            $Script:SpeechConfigurations.remove($cn)
+            foreach ($cn in $ConfigurationName){
+                if ($Script:SpeechConfigurations.ContainsKey($cn))
+                {
+                    $Script:SpeechConfigurations.$cn.dispose()
+                    $Script:SpeechConfigurations.remove($cn)
+                }
+                Else
+                {
+                    Write-Warning "SpeechConfiguration $cn does not exist."
+                }
+            }
         }
-        Else
+        'All'
         {
-            Write-Warning "SpeechConfiguration $cn does not exist."
+            $Keys = $Script:SpeechConfigurations.Keys | ForEach-Object {$_} #disconnect the Keys from the actual hashtable object
+            foreach ($k in $Keys)
+            {
+                $Script:SpeechConfigurations.$k.dispose()
+                $Script:SpeechConfigurations.remove($k)
+            }
         }
     }
 }#Function Disable-SpeechConfiguration
