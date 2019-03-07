@@ -1,5 +1,19 @@
 Function Get-SpeechVoice
 {
+    <#
+    .SYNOPSIS
+        Gets all or specified currently available voices that can be specified for use with SpeechConfigurations, Out-Speech, or Export-Speech
+    .DESCRIPTION
+        Gets all or specified currently available voices that can be specified for use with SpeechConfigurations, Out-Speech, or Export-Speech.
+        Voices can be specified by name, age, gender, or culture.
+    .EXAMPLE
+        PS C:\> Get-SpeechVoice
+
+        Gets all currently available voices
+    .EXAMPLE
+        PS C:\> Get-SpeechVoice -
+        Explanation of what the example does
+    #>
     [cmdletbinding()]
     param
     (
