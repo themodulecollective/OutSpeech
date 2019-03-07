@@ -23,7 +23,7 @@ Function Enable-SpeechConfiguration
     param
     (
         [parameter()]
-        [string]$ConfigurationName
+        [string]$ConfigurationName = 'Default'
         ,
         [parameter()]
         [string]$Voice
