@@ -35,10 +35,14 @@ function Get-SpeechConfiguration
     )
     if ($null -eq $ConfigurationName)
     {
-        $Script:SpeechConfigurations.getenumerator() | ForEach-Object {$_}
+        $Script:SpeechConfigurations.keys | ForEach-Object {
+            $Script:SpeechConfigurations.$_ |
+            Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $_ -PassThru -Force
+        }
     }
     foreach ($cn in $ConfigurationName)
     {
-        $Script:SpeechConfigurations.$cn
+        $Script:SpeechConfigurations.$cn |
+        Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $cn -PassThru -Force
     }
 }
