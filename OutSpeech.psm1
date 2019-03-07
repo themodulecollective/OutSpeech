@@ -16,8 +16,6 @@ foreach ( $folder in @( 'Private', 'Public', 'Classes','Functions' ) )
 }
 
 $script:SpeechConfigurations = @{}
-$script:SpeechConfigurations
-Enable-SpeechConfiguration -ConfigurationName 'Default'
 
 if ($null -ne $PSVersionTable -and $PSVersionTable.PSVersion.Major -ge 5)
 {

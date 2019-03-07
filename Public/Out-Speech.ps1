@@ -1,43 +1,46 @@
 
 Function Out-Speech
 {
-    <#
+<#
 .SYNOPSIS
-    Used to allow PowerShell to speak to you.
-
+    Accepts string or object input (non-string objects will be converted to strings using out-string) and outputs it to speech.
 .DESCRIPTION
-    Used to allow PowerShell to speak to you.
-
+    Accepts string or object input (non-string objects will be converted to strings using out-string) and outputs it to speech
+    using the specified SpeechConfiguration and/or Rate, Volume, and Voice. The default output method is asynchronous (audio outputs while PowerShell continues).
 .PARAMETER InputObject
-    Data that will be spoken or sent to a WAV file.
-
+    Strings or objects that will be converted to speech and sent to the default audio device.
 .PARAMETER Rate
-    Sets the speaking rate
-
+    Specifies the speech rate with higher values being faster.  Valid range is -10 through 10.  Default is 0.
 .PARAMETER Volume
-    Sets the output volume
+    Specifies the speech volume with higher values being louder.  Valid range is 1 through 100.  Default is 100.
+.PARAMETER Voice
+    Specifies the speech voice to user.  Run Get-SpeechVoice to see valid values - use the name attribute.  Default depends on the system language/culture settings.
+.PARAMETER ConfigurationName
+    Specifies the ConfigurationName to use.  Default is 'Default'.
+.PARAMETER SynchronousOutput
+    Makes the audio output Synchronous (PowerShell pauses until the audio output has completed).
 
 .EXAMPLE
-    "This is a test" | Out-Voice
+    "This is a test" | Out-Speech
 
     Description
     -----------
     Speaks the string that was given to the function in the pipeline.
+.EXAMPLE
+    Enable-SpeechConfiguration -ConfigurationName 'TooSlowTooSoft' -rate -2 -volume 5
+    "Today's date is $((get-date).toshortdatestring())" | Out-Speech -ConfigurationName 'TooSlowTooSoft'
+
+    Description
+    -----------
+    Sends 'Today's date is ______' to the default audio device.
 
 .EXAMPLE
-    "Today's date is $((get-date).toshortdatestring())" | Out-Voice
+    Enable-SpeechConfiguration -ConfigurationName 'TooSlowTooSoft' -rate -2 -volume 5
+    "Today's date is $((get-date).toshortdatestring())" | Out-Speech -ConfigurationName 'TooSlowTooSoft' -SynchronousOutput
 
     Description
     -----------
-    Says todays date
-
-    .EXAMPLE
-    "Today's date is $((get-date).toshortdatestring())" | Out-Voice -ToWavFile "C:\temp\test.wav"
-
-    Description
-    -----------
-    Says todays date
-
+    Sends 'Today's date is ______' to the default audio device and PowerShell waits for the output to complete.
 #>
     [cmdletbinding(DefaultParameterSetName = 'ASync')]
     Param
