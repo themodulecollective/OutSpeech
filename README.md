@@ -11,7 +11,7 @@
 
 ## How it Works
 
-1. import the OutSpeech module into your PowerShell session
+1. Import the OutSpeech module into your PowerShell session
 2. Simple usage: 'Out-Speech "Hello, Dave"'
    - Out-Speech will create a Default SpeechConfiguration object
    - Out-Speech will re-use the Default SpeechConfiguration object if it exists
@@ -26,8 +26,9 @@
 
 ## Development Plans
 
-2. Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
-4. Add support for SSML with the SpeakSsml and/or SpeakSsmlAsync methods: http://www.w3.org/TR/speech-synthesis/ and https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
+- Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
+- Add support for SSML with the SpeakSsml and/or SpeakSsmlAsync methods: http://www.w3.org/TR/speech-synthesis/ and https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
+- Speech Recognition? https://gallery.technet.microsoft.com/scriptcenter/Fun-with-PowerShell-and-c59c3d4b#content
 
 ## Basic Usage Example
 
