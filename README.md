@@ -26,8 +26,8 @@
 
 ## Development Plans
 
-2. Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
-4. Add support for SSML with the SpeakSsml and/or SpeakSsmlAsync methods: http://www.w3.org/TR/speech-synthesis/ and https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
+ - Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
+ - Add support for SSML with the SpeakSsml and/or SpeakSsmlAsync methods: http://www.w3.org/TR/speech-synthesis/ and https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
 
 ## Basic Usage Example
 
