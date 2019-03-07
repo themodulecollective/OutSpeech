@@ -55,6 +55,10 @@ Function Get-SpeechVoice
         [parameter()]
         [string[]]$Culture # like 'en-US'
     )
+    if (-not $script:SpeechConfigurations.containskey('Default'))
+    {
+        Enable-SpeechConfiguration -ConfigurationName 'Default'
+    }
     $SpeechConfiguration = $script:SpeechConfigurations.Default
     $Voices = $SpeechConfiguration.GetInstalledVoices()
     foreach ($voice in $Voices)
