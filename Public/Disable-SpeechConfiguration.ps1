@@ -18,7 +18,9 @@ Function Disable-SpeechConfiguration
 
         # No output expected
     .PARAMETER ConfigurationName
-    The name of an existing SpeechConfiguration to Disable (delete).
+        The name of an existing SpeechConfiguration to Disable (delete).
+    .PARAMETER All
+        Specifying All causes Disable-SpeechConfiguration to Disable (delete) all currently configured SpeechConfigurations.
     #>
     [cmdletbinding(DefaultParameterSetName = 'NamedConfig')]
     param
