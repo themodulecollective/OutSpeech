@@ -16,34 +16,14 @@ Remove-Module -Name $Script:ModuleName -Force -ErrorAction SilentlyContinue
 Write-Information -MessageData "Import Module $Script:ModuleName" -InformationAction Continue
 Import-Module -Name $Script:ModuleSettingsFile -Force
 
-Describe "Public commands in $script:ModuleName have comment-based or external help" -Tags 'Build' {
-    $functions = Get-Command -Module $Script:ModuleName
-    $help = foreach ($function in $functions)
+Describe "Public commands have Pester tests" -Tag 'Build' {
+    $commands = Get-Command -Module $Script:ModuleName
+
+    foreach ($command in $commands.Name)
     {
-        Get-Help -Name $function.Name
-    }
-
-    foreach ($node in $help)
-    {
-        Context $node.Name {
-            It "Should have a Description or Synopsis" {
-                ($node.Description + $node.Synopsis) | Should Not BeNullOrEmpty
-            }
-
-            It "Should have an Example" {
-                $node.Examples | Should Not BeNullOrEmpty
-                $node.Examples | Out-String | Should -Match ($node.Name)
-            }
-
-            foreach ($parameter in $node.Parameters.Parameter)
-            {
-                if ($parameter -notmatch 'WhatIf|Confirm')
-                {
-                    It "Should have a Description for Parameter [$($parameter.Name)]" {
-                        $parameter.Description.Text | Should Not BeNullOrEmpty
-                    }
-                }
-            }
+        $file = Get-ChildItem -Path "$Script:ProjectRoot\Tests" -Include "$command.Tests.ps1" -Recurse
+        It "Should have a Pester test for [$command]" {
+            $file.FullName | Should Not BeNullOrEmpty
         }
     }
 }
