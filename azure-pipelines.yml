@@ -4,33 +4,33 @@
 # https://aka.ms/yaml
 
 trigger:
- branches:
-  include:
+  branches:
+    include:
       - master
- paths:
-  include:
+  paths:
+    include:
       - OutSpeech/OutSpeech.psd1
 
 pool:
-  vmImage: 'windows-2019'
+  vmImage: "windows-2019"
 
 steps:
-- task: PowerShell@2
-  displayName: 'Run InvokeBuild Tasks'
-  inputs:
-    filePath: 'Build.ps1'
-    pwsh: false
+  - task: PowerShell@2
+    displayName: "Run InvokeBuild Tasks"
+    inputs:
+      filePath: "Build.ps1"
+      pwsh: false
 
-- task: PublishTestResults@2
-  displayName: 'Publish Pester Test Results'
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    searchFolder: '$(System.DefaultWorkingDirectory)/TestResults'
-    failTaskOnFailedTests: true
+  - task: PublishTestResults@2
+    displayName: "Publish Pester Test Results"
+    inputs:
+      testResultsFormat: "NUnit"
+      testResultsFiles: "**/TEST-*.xml"
+      searchFolder: "$(System.DefaultWorkingDirectory)/TestResults"
+      failTaskOnFailedTests: true
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)/s/artifacts'
-    artifact: 'InstallManager'
-    publishLocation: 'pipeline'
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: "$(Pipeline.Workspace)/s/artifacts"
+      artifact: "OutSpeech"
+      publishLocation: "pipeline"
