@@ -9,10 +9,6 @@ Task InstallDependencies {
   {
     Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
   }
-  if ((Get-Module -Name PSFramework -ListAvailable).count -lt 1)
-  {
-    Install-Module -Name PSFramework -Scope CurrentUser -Force
-  }
 }
 
 Task CleanTestResults {
