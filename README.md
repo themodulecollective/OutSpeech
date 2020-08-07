@@ -30,9 +30,9 @@ OutSpeech provides the following features:
 
 ## Development Plans
 
-- Export-Speech: Support Audio Format Info:  https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx
-- Add support for SSML with the SpeakSsml and/or SpeakSsmlAsync methods: http://www.w3.org/TR/speech-synthesis/ and https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx
-- Speech Recognition? https://gallery.technet.microsoft.com/scriptcenter/Fun-with-PowerShell-and-c59c3d4b#content
+- Export-Speech: Support [Audio Format Info](https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx)
+- Add support for SSML with the [SpeakSsml](http://www.w3.org/TR/speech-synthesis/) and/or [SpeakSsmlAsync](https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx) methods
+- [Speech Recognition?](https://gallery.technet.microsoft.com/scriptcenter/Fun-with-PowerShell-and-c59c3d4b#content)
 
 ## Basic Usage Example
 
@@ -42,7 +42,7 @@ OutSpeech provides the following features:
     Out-Speech "This is Microsoft Zira Desktop" -Rate 3 -Volume 90 -Voice "Microsoft Zira Desktop"
 ```
 
-This is one of the default voices on my Windows 10 system, yours may vary depending on language packs/editions of Windows.
+This is one of the default voices on my Windows 10 system, yours may vary depending on language packs/editions of Windows. Use Get-SpeechVoice to see what is available on your local system.
 
 ## Advanced Usage Example
 
