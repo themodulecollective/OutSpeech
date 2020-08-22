@@ -45,11 +45,11 @@ Function Get-SpeechVoice
         [string[]]$Name
         ,
         [parameter()]
-        [validateset('Adult','Child','NotSet','Senior','Teen')]
+        [validateset('Adult', 'Child', 'NotSet', 'Senior', 'Teen')]
         [string[]]$Age
         ,
         [parameter()]
-        [validateset('Female','Male','Neutral','NotSet')]
+        [validateset('Female', 'Male', 'Neutral', 'NotSet')]
         [string[]]$Gender
         ,
         [parameter()]
@@ -74,7 +74,7 @@ Function Get-SpeechVoice
             AdditionalInfo        = $voice.VoiceInfo.AdditionalInfo
             Enabled               = $voice.Enabled
         }
-        $CustomOutputObject | Where-object -FilterScript {
+        $CustomOutputObject | Where-Object -FilterScript {
             ($null -eq $Name -or $_.Name -in $Name -or $_.Name -like $Name) -and
             ($null -eq $Age -or $_.Age -in $Age) -and
             ($null -eq $Gender -or $_.Gender -in $Gender) -and

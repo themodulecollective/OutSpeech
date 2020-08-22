@@ -36,14 +36,14 @@ Function Enable-SpeechConfiguration
         [ValidateRange(1, 100)]
         $Volume
     )
-    if ($Script:SpeechConfigurations.ContainsKey($ConfigurationName))
+    if ($Script:SpeechConfigurations.ContainsKey($ConfigurationName) -and $ConfigurationName -ne 'Default')
     {
-        throw ("SpeechConfiguration $ConfigurationName already exists.  Use Disable-Speech to remove it or Set-Speech to modify it.")
+        throw ("SpeechConfiguration $ConfigurationName already exists.  Use Disable-SpeechConfiguration to remove it or Set-SpeechConfiguration to modify it.")
         Return
     }
     $InitializeSpeechParams =
     @{
-        ErrorAction         = 'Stop'
+        ErrorAction       = 'Stop'
         ConfigurationName = $ConfigurationName
     }
     foreach ($param in $PSBoundParameters.Keys)

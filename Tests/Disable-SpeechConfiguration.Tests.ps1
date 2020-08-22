@@ -20,7 +20,7 @@ Describe "$CommandName Unit Tests" -Tag 'UnitTests' {
     Context "Validate parameters" {
         $defaultParamCount = 11
         [object[]]$params = (Get-ChildItem "function:\$CommandName").Parameters.Keys
-        $knownParameters = 'ConfigurationName', 'Voice', 'Rate', 'Volume'
+        $knownParameters = 'ConfigurationName', 'All'
         $paramCount = $knownParameters.Count
         It "Should contain specific parameters" {
             ( (Compare-Object -ReferenceObject $knownParameters -DifferenceObject $params -IncludeEqual | Where-Object SideIndicator -EQ "==").Count ) | Should Be $paramCount
@@ -34,30 +34,19 @@ Describe "$CommandName Unit Tests" -Tag 'UnitTests' {
 Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     BeforeAll {
         Disable-SpeechConfiguration -All
+        Enable-SpeechConfiguration #Default
+        Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David'
+        Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate'
+        Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume'
     }
-    Context "Enables SpeechConfiguration(s)" {
-        It "Enables a Default SpeechConfiguration without error" {
-            { Enable-SpeechConfiguration } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName Default
-            $SpeechConfiguration.ConfigurationName | Should BeExactly 'Default'
+    Context "Disable SpeechConfiguration(s)" {
+        It "Disables a SpeechConfiguration with the specified ConfigurationName" {
+            { Disable-SpeechConfiguration -ConfigurationName 'David' } | Should Not Throw
+            { Get-SpeechConfiguration -ConfigurationName 'David' -ErrorAction Stop } | Should Throw
         }
-        It "Enables a SpeechConfiguration with the specified Voice" {
-            { Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'David'
-            $SpeechConfiguration.Voice.Name | Should BeExactly 'Microsoft David Desktop'
-        }
-        It "Throws if a SpeechConfiguration already exists with the ConfigurationName" {
-            { Enable-SpeechConfiguration -ConfigurationName 'David' } | Should Throw
-        }
-        It "Enables a SpeechConfiguration with the specified Rate" {
-            { Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Rate'
-            $SpeechConfiguration.Rate | Should BeExactly 5
-        }
-        It "Enables a SpeechConfiguration with the specified Volume" {
-            { Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Volume'
-            $SpeechConfiguration.Volume | Should BeExactly 15
+        It "Disables All SpeechConfigurations" {
+            { Disable-SpeechConfiguration -All } | Should Not Throw
+            { $null -eq $(Get-SpeechConfiguration) } | Should Be $True
         }
     }
 }

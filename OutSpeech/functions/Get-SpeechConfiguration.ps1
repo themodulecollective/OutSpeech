@@ -1,6 +1,6 @@
 function Get-SpeechConfiguration
 {
-<#
+    <#
 .SYNOPSIS
     Gets all existing SpeechConfigurations or those that match the values provided with the ConfigurationName parameter.
 .DESCRIPTION
@@ -42,7 +42,15 @@ function Get-SpeechConfiguration
     }
     foreach ($cn in $ConfigurationName)
     {
-        $Script:SpeechConfigurations.$cn |
-        Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $cn -PassThru -Force
+        try
+        {
+            $Script:SpeechConfigurations.$cn |
+            Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $cn -PassThru -Force -ErrorAction Stop
+        }
+        catch
+        {
+            Write-Error -Message "SpeechConfiguration $cn is not found."
+        }
+
     }
 }

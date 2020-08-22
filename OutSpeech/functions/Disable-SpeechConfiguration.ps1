@@ -35,7 +35,8 @@ Function Disable-SpeechConfiguration
     {
         'NamedConfig'
         {
-            foreach ($cn in $ConfigurationName){
+            foreach ($cn in $ConfigurationName)
+            {
                 if ($Script:SpeechConfigurations.ContainsKey($cn))
                 {
                     $Script:SpeechConfigurations.$cn.dispose()
@@ -49,7 +50,7 @@ Function Disable-SpeechConfiguration
         }
         'All'
         {
-            $Keys = $Script:SpeechConfigurations.Keys | ForEach-Object {$_} #disconnect the Keys from the actual hashtable object
+            $Keys = $Script:SpeechConfigurations.Keys | ForEach-Object { $_ } #disconnect the Keys from the actual hashtable object
             foreach ($k in $Keys)
             {
                 $Script:SpeechConfigurations.$k.dispose()
