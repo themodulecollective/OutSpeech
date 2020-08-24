@@ -32,25 +32,28 @@ function Get-SpeechConfiguration
     param (
         [parameter()]
         [string[]]$ConfigurationName
+        ,
+        [parameter()]
+        [string[]]$Voice
+        ,
+        [parameter()]
+        [ValidateRange(-10, 10)]
+        [Int[]]$Rate
+        ,
+        [parameter()]
+        [ValidateRange(1, 100)]
+        [int[]]$Volume
     )
-    if ($null -eq $ConfigurationName)
-    {
-        $Script:SpeechConfigurations.keys | ForEach-Object {
+
+    $Script:SpeechConfigurations.keys.foreach( {
             $Script:SpeechConfigurations.$_ |
             Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $_ -PassThru -Force
-        }
-    }
-    foreach ($cn in $ConfigurationName)
-    {
-        try
+        }).where(
         {
-            $Script:SpeechConfigurations.$cn |
-            Add-Member -MemberType NoteProperty -Name ConfigurationName -Value $cn -PassThru -Force -ErrorAction Stop
+            ($null -eq $ConfigurationName -or $_.ConfigurationName -in $ConfigurationName) -and
+            ($null -eq $Voice -or $_.Voice.Name -in $Voice) -and
+            ($null -eq $Rate -or $_.Rate -in $Rate) -and
+            ($null -eq $Volume -or $_.Volume -in $Volume)
         }
-        catch
-        {
-            Write-Error -Message "SpeechConfiguration $cn is not found."
-        }
-
-    }
+    )
 }

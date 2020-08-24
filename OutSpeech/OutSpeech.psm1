@@ -1,4 +1,4 @@
-﻿#Requires -Version 3
+﻿#Requires -Version 5.1 -psedition Desktop
 
 $ModuleFolder = Split-Path $PSCommandPath -Parent
 

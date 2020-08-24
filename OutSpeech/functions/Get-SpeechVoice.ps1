@@ -5,7 +5,7 @@ Function Get-SpeechVoice
         Gets all or specified currently available voices that can be specified for use with SpeechConfigurations, Out-Speech, or Export-Speech
     .DESCRIPTION
         Gets all or specified currently available voices that can be specified for use with SpeechConfigurations, Out-Speech, or Export-Speech.
-        Voices can be specified by name, age, gender, or culture.
+        Voices can be specified by name, age, gender, or culture.  Get more voices here: https://www.microsoft.com/en-us/download/details.aspx?id=27224
     .PARAMETER Name
         Specify the name of the voice to get. Simple wildcards supported. Run 'Get-SpeechVoice | Select-Object -ExpandProperty Name' to see all available names.
     .PARAMETER Age
@@ -42,6 +42,10 @@ Function Get-SpeechVoice
     [cmdletbinding()]
     param
     (
+        [parameter()]
+        [string[]]$VoiceId
+        ,
+        [parameter()]
         [string[]]$Name
         ,
         [parameter()]
@@ -75,6 +79,7 @@ Function Get-SpeechVoice
             Enabled               = $voice.Enabled
         }
         $CustomOutputObject | Where-Object -FilterScript {
+            ($null -eq $VoiceId -or $_.Id -in $VoiceId) -and
             ($null -eq $Name -or $_.Name -in $Name -or $_.Name -like $Name) -and
             ($null -eq $Age -or $_.Age -in $Age) -and
             ($null -eq $Gender -or $_.Gender -in $Gender) -and
