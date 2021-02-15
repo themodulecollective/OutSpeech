@@ -42,7 +42,7 @@ Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     Context "Get SpeechConfiguration(s)" {
         It "Gets a SpeechConfiguration with the specified Voice" {
             $SpecifiedVoiceConfiguration = Get-SpeechConfiguration -Voice 'Microsoft David Desktop'
-            ($SpecifiedVoiceConfiguration).count | Should BeExactly 1
+            ($SpecifiedVoiceConfiguration).count | Should BeExactly 4
             $SpecifiedVoiceConfiguration.voice.name | Should BeExactly 'Microsoft David Desktop'
         }
         It "Gets a SpeechConfiguration with the specified Rate" {
