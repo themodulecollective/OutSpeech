@@ -15,7 +15,7 @@ Function Enable-SpeechConfiguration
     .PARAMETER Volume
         Specifies the speech volume with higher values being louder.  Valid range is 1 through 100.  Default is 100.
     .PARAMETER Voice
-        Specifies the speech voice to user.  Run Get-SpeechVoice to see valid values - use the name attribute.  Default depends on the system language/culture settings.
+        Specifies the speech voice to use.  Run Get-SpeechVoice to see valid values - use the name attribute.  Default depends on the system language/culture settings.
     .PARAMETER ConfigurationName
         Specifies the ConfigurationName to create.  Default is 'Default'.
     #>

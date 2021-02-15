@@ -55,7 +55,7 @@ Function Export-Speech
     begin
     {
         $SpeechParams = @{
-            ErrorAction         = 'Stop'
+            ErrorAction       = 'Stop'
             ConfigurationName = $ConfigurationName
         }
         foreach ($param in $PSBoundParameters.Keys)

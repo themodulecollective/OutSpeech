@@ -1,6 +1,6 @@
 @{
     # Version number of this module.
-    ModuleVersion        = '1.0.0'
+    ModuleVersion        = '1.0.1'
 
     # Script module or binary module file associated with this manifest.
     RootModule           = 'OutSpeech.psm1'
@@ -14,7 +14,7 @@
     # Author of this module
     Author               = 'Mike Campbell'
     CompanyName          = 'themodulecollective'
-    Copyright            = '2020'
+    Copyright            = '2021'
 
     # Description of the functionality provided by this module
     Description          = 'Provides Out-Speech and Export-Speech functions along with customized SpeechConfiguration support.  Uses System.Speech.Synthesis.SpeechSynthesizer from .net framework.'

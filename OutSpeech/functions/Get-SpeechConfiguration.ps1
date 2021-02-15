@@ -7,6 +7,12 @@ function Get-SpeechConfiguration
     Gets all existing SpeechConfigurations or those that match the values provided with the ConfigurationName parameter.
 .PARAMETER ConfigurationName
     Specify the name (string) of an existing SpeechConfiguration to get.  'Default' should always exist unless it has been disabled with Disable-SpeechConfiguration.
+.PARAMETER Rate
+    Specifies the speech rate of the configurations to return.  Valid range is -10 through 10.
+.PARAMETER Volume
+    Specifies the speech volume of the configurations to return.  Valid range is 1 through 100.
+.PARAMETER Voice
+    Specifies the speech voice of the configurations to return.  Run Get-SpeechVoice to see valid values - use the name attribute.  Default depends on the system language/culture settings.
 .EXAMPLE
     PS C:\> Enable-SpeechConfiguration -ConfigurationName 'Test'
     PS C:\> Get-SpeechConfiguration

@@ -34,26 +34,30 @@ Describe "$CommandName Unit Tests" -Tag 'UnitTests' {
 Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     BeforeAll {
         Disable-SpeechConfiguration -All
-        Enable-SpeechConfiguration
-        Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David'
-        Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate'
-        Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume'
     }
-    Context "Sets SpeechConfiguration(s)" {
-        It "Modifies a Default SpeechConfiguration without error" {
-            { Set-SpeechConfiguration -ConfigurationName 'Default' -volume 50 } | Should Not Throw
+    Context "Enables SpeechConfiguration(s)" {
+        It "Enables a Default SpeechConfiguration without error" {
+            { Enable-SpeechConfiguration } | Should Not Throw
             $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName Default
-            $SpeechConfiguration.Volume | Should BeExactly 50
+            $SpeechConfiguration.ConfigurationName | Should BeExactly 'Default'
+        }
+        It "Enables a SpeechConfiguration with the specified Voice" {
+            { Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David' } | Should Not Throw
+            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'David'
+            $SpeechConfiguration.Voice.Name | Should BeExactly 'Microsoft David Desktop'
+        }
+        It "Throws if a SpeechConfiguration already exists with the ConfigurationName" {
+            { Enable-SpeechConfiguration -ConfigurationName 'David' } | Should Throw
         }
         It "Enables a SpeechConfiguration with the specified Rate" {
-            { Set-SpeechConfiguration -Rate 10 -ConfigurationName 'Rate' } | Should Not Throw
+            { Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate' } | Should Not Throw
             $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Rate'
-            $SpeechConfiguration.Rate | Should BeExactly 10
+            $SpeechConfiguration.Rate | Should BeExactly 5
         }
         It "Enables a SpeechConfiguration with the specified Volume" {
-            { set-SpeechConfiguration -Volume 1 -ConfigurationName 'Volume' } | Should Not Throw
+            { Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume' } | Should Not Throw
             $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Volume'
-            $SpeechConfiguration.Volume | Should BeExactly 1
+            $SpeechConfiguration.Volume | Should BeExactly 15
         }
     }
 }

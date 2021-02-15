@@ -1,10 +1,8 @@
 Task . InstallDependencies, CleanTestResults, Tests, CleanArtifacts, BuildModuleFiles
 
 Task InstallDependencies {
-  if ((Get-Module -Name Pester -ListAvailable).count -lt 1)
-  {
-    Install-Module -Name Pester -Scope CurrentUser -Force
-  }
+  Install-Module -Name Pester -Scope CurrentUser -Force -MaximumVersion '4.99.99'
+
   if ((Get-Module -Name PSScriptAnalyzer -ListAvailable).count -lt 1)
   {
     Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
@@ -24,7 +22,7 @@ Task CleanTestResults {
 
 Task Tests {
 
-  Import-Module Pester
+  Import-Module Pester -MaximumVersion '4.99.99'
   $TestResults = $(Join-Path -Path $BuildRoot -ChildPath 'TestResults')
 
   $invokePesterParams = @{

@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.automationShell.windows": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "terminal.integrated.shell.windows": "C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)"
+}

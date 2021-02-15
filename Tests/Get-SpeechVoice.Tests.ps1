@@ -20,7 +20,7 @@ Describe "$CommandName Unit Tests" -Tag 'UnitTests' {
     Context "Validate parameters" {
         $defaultParamCount = 11
         [object[]]$params = (Get-ChildItem "function:\$CommandName").Parameters.Keys
-        $knownParameters = 'ConfigurationName', 'Voice', 'Rate', 'Volume'
+        $knownParameters = 'VoiceId', 'Name', 'Age', 'Gender', 'Culture'
         $paramCount = $knownParameters.Count
         It "Should contain specific parameters" {
             ( (Compare-Object -ReferenceObject $knownParameters -DifferenceObject $params -IncludeEqual | Where-Object SideIndicator -EQ "==").Count ) | Should Be $paramCount
@@ -35,25 +35,28 @@ Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     BeforeAll {
         Disable-SpeechConfiguration -All
         Enable-SpeechConfiguration
-        Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David'
-        Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate'
-        Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume'
     }
-    Context "Sets SpeechConfiguration(s)" {
-        It "Modifies a Default SpeechConfiguration without error" {
-            { Set-SpeechConfiguration -ConfigurationName 'Default' -volume 50 } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName Default
-            $SpeechConfiguration.Volume | Should BeExactly 50
+    Context "Get SpeechVoice(s)" {
+        It "Gets a SpeechVoice with the specified Name" {
+            $SpecifiedVoice = @(Get-SpeechVoice -Name 'Microsoft David Desktop')
+            $SpecifiedVoice.count | Should BeExactly 1
+            $SpecifiedVoice.name | Should BeExactly 'Microsoft David Desktop'
         }
-        It "Enables a SpeechConfiguration with the specified Rate" {
-            { Set-SpeechConfiguration -Rate 10 -ConfigurationName 'Rate' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Rate'
-            $SpeechConfiguration.Rate | Should BeExactly 10
+        It "Gets a SpeechVoice with the specified Age" {
+            $SpecifiedVoice = @(Get-SpeechVoice -Age 'Adult')
+            $SpecifiedVoice[0].age | Should BeExactly 'Adult'
         }
-        It "Enables a SpeechConfiguration with the specified Volume" {
-            { set-SpeechConfiguration -Volume 1 -ConfigurationName 'Volume' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Volume'
-            $SpeechConfiguration.Volume | Should BeExactly 1
+        It "Gets a SpeechVoice with the specified Gender" {
+            $SpecifiedVoice = @(Get-SpeechVoice -Gender 'Male')
+            $SpecifiedVoice[0].Gender | Should BeExactly 'Male'
+        }
+        It "Gets a SpeechVoice with the specified Culture" {
+            $SpecifiedVoice = @(Get-SpeechVoice -Culture 'en-US')
+            $SpecifiedVoice[0].Culture | Should BeExactly 'en-US'
+        }
+        It "Gets a SpeechVoice with the specified ID" {
+            $SpecifiedVoice = @(Get-SpeechVoice -VoiceId 'TTS_MS_EN-US_DAVID_11.0')
+            $SpecifiedVoice[0].Id | Should BeExactly 'TTS_MS_EN-US_DAVID_11.0'
         }
     }
 }

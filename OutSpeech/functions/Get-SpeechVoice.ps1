@@ -8,6 +8,8 @@ Function Get-SpeechVoice
         Voices can be specified by name, age, gender, or culture.  Get more voices here: https://www.microsoft.com/en-us/download/details.aspx?id=27224
     .PARAMETER Name
         Specify the name of the voice to get. Simple wildcards supported. Run 'Get-SpeechVoice | Select-Object -ExpandProperty Name' to see all available names.
+    .PARAMETER VoiceID
+        Specify the ID of voice to get, like 'TTS_MS_EN-US_DAVID_11.0' Simple wildcards supported. Run 'Get-SpeechVoice | Select-Object -ExpandProperty ID' to see all available IDs.
     .PARAMETER Age
         Specify the age of the voice to get. Valid values are 'Adult','Child','NotSet','Senior','Teen'
     .PARAMETER Gender

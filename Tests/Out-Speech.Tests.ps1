@@ -20,7 +20,7 @@ Describe "$CommandName Unit Tests" -Tag 'UnitTests' {
     Context "Validate parameters" {
         $defaultParamCount = 11
         [object[]]$params = (Get-ChildItem "function:\$CommandName").Parameters.Keys
-        $knownParameters = 'ConfigurationName', 'Voice', 'Rate', 'Volume'
+        $knownParameters = 'inputobject', 'ConfigurationName', 'Voice', 'Rate', 'Volume', 'SynchronousOutput'
         $paramCount = $knownParameters.Count
         It "Should contain specific parameters" {
             ( (Compare-Object -ReferenceObject $knownParameters -DifferenceObject $params -IncludeEqual | Where-Object SideIndicator -EQ "==").Count ) | Should Be $paramCount
@@ -35,25 +35,11 @@ Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     BeforeAll {
         Disable-SpeechConfiguration -All
         Enable-SpeechConfiguration
-        Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David'
-        Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate'
-        Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume'
     }
-    Context "Sets SpeechConfiguration(s)" {
-        It "Modifies a Default SpeechConfiguration without error" {
-            { Set-SpeechConfiguration -ConfigurationName 'Default' -volume 50 } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName Default
-            $SpeechConfiguration.Volume | Should BeExactly 50
-        }
-        It "Enables a SpeechConfiguration with the specified Rate" {
-            { Set-SpeechConfiguration -Rate 10 -ConfigurationName 'Rate' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Rate'
-            $SpeechConfiguration.Rate | Should BeExactly 10
-        }
-        It "Enables a SpeechConfiguration with the specified Volume" {
-            { set-SpeechConfiguration -Volume 1 -ConfigurationName 'Volume' } | Should Not Throw
-            $SpeechConfiguration = Get-SpeechConfiguration -ConfigurationName 'Volume'
-            $SpeechConfiguration.Volume | Should BeExactly 1
+    Context "Out Speech does not throw" {
+        $String = "The Son radiates God's own glory and expresses the very character of God, and he sustains everything by the mighty power of his command."
+        It "Runs Out-Speech without error" {
+            { $String | Out-Speech } | Should Not Throw
         }
     }
 }
