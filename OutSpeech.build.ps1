@@ -22,7 +22,7 @@ Task CleanTestResults {
 
 Task Tests {
 
-  Import-Module Pester -MaximumVersion '4.99.99'
+  Import-Module Pester -MaximumVersion '4.99.99' -Force
   $TestResults = $(Join-Path -Path $BuildRoot -ChildPath 'TestResults')
 
   $invokePesterParams = @{
@@ -32,7 +32,7 @@ Task Tests {
     EnableExit   = $false
     OutputFormat = 'NUnitXml'
     OutputFile   = $(Join-Path -Path $TestResults -childPath 'Test-Pester.XML')
-    CodeCoverage = "$(Join-Path -Path $(Join-Path -Path $BuildRoot -ChildPath 'InstallManager') -ChildPath 'functions')*.ps1"
+    CodeCoverage = "$(Join-Path -Path $(Join-Path -Path $BuildRoot -ChildPath 'OutSpeech') -ChildPath 'functions')*.ps1"
   }
 
   # Publish Test Results as NUnitXml
