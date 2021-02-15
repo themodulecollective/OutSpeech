@@ -38,13 +38,12 @@ Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
         Enable-SpeechConfiguration -Voice 'Microsoft David Desktop' -ConfigurationName 'David'
         Enable-SpeechConfiguration -Rate 5 -ConfigurationName 'Rate'
         Enable-SpeechConfiguration -Volume 15 -ConfigurationName 'Volume'
-        Enable-SpeechConfiguration -Voice 'Microsoft Zira' -ConfigurationName 'Zira'
     }
     Context "Get SpeechConfiguration(s)" {
         It "Gets a SpeechConfiguration with the specified Voice" {
-            $SpecifiedVoiceConfiguration = Get-SpeechConfiguration -Voice 'Microsoft Zira'
-            ($SpecifiedVoiceConfiguration).count  | Should BeExactly 1
-            $SpecifiedVoiceConfiguration.voice.name | Should BeExactly 'Microsoft Zira'
+            $SpecifiedVoiceConfiguration = Get-SpeechConfiguration -Voice 'Microsoft David Desktop'
+            ($SpecifiedVoiceConfiguration).count | Should BeExactly 1
+            $SpecifiedVoiceConfiguration.voice.name | Should BeExactly 'Microsoft David Desktop'
         }
         It "Gets a SpeechConfiguration with the specified Rate" {
             $SpeechConfiguration = Get-SpeechConfiguration -rate 5
