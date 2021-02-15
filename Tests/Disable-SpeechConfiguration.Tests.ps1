@@ -42,7 +42,7 @@ Describe "$commandname Integration Tests" -Tags "IntegrationTests" {
     Context "Disable SpeechConfiguration(s)" {
         It "Disables a SpeechConfiguration with the specified ConfigurationName" {
             { Disable-SpeechConfiguration -ConfigurationName 'David' } | Should Not Throw
-            { Get-SpeechConfiguration -ConfigurationName 'David' -ErrorAction Stop } | Should Throw
+            Get-SpeechConfiguration -ConfigurationName 'David' | Should Be $null
         }
         It "Disables All SpeechConfigurations" {
             { Disable-SpeechConfiguration -All } | Should Not Throw
