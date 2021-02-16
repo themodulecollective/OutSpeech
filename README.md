@@ -1,6 +1,6 @@
 # OutSpeech
 
-OutSpeech is a PowerShell module inspired by inspired by these articles:
+OutSpeech is a Windows PowerShell module inspired by inspired by these articles:
 
 - [Give PowerShell a Voice](https://learn-powershell.net/2013/12/04/give-powershell-a-voice-using-the-speechsynthesizer-class/)
 - [OutVoice](https://gallery.technet.microsoft.com/scriptcenter/Out-Voice-1be16d5e)
@@ -13,9 +13,16 @@ OutSpeech provides the following features:
 - Get-SpeechVoice function to enumerate the available voices installed on a system
 - a Disable-SpeechConfiguration function for cleanup of the Speech Configuration Object(s) used or created by OutSpeech.
 
+## Release Notes
+
+1.0.3 Documentation Updates : Updates to this readme.md file.
+1.0.2 License and metadata updates.
+1.0.1 Original release to PSGallery
+
+
 ## How it Works
 
-1. Import the OutSpeech module into your PowerShell session
+1. NOTE: Only works on Windows machines right now (no .Net core support for speech synthesis yet).  Import the OutSpeech module into your Windows PowerShell session (if using PowerShell 6.x or 7.x, use the Import-Module parameter -UseWindowsPowerShell).
 2. Simple usage: 'Out-Speech "Hello, Dave"'
    - Out-Speech will create a Default SpeechConfiguration object
    - Out-Speech will re-use the Default SpeechConfiguration object if it exists
@@ -25,13 +32,14 @@ OutSpeech provides the following features:
    - create a speech object profile with Enable-SpeechConfiguration, specifying a ConfigurationName, a rate, a voice, and a volume setting to use
    - use the SpeechConfiguration Out-Speech by specifying the ConfigurationName
    - modify a SpeechConfiguration using Set-SpeechConfiguration
+   - create a wav file of speech using Export-Speech
 4. A note about the rate, volume, and voice parameters when used with Out-Speech
     -When you use the Rate, Volume, or Voice parameters with Out-Speech the settings will persist on the SpeechConfiguration object specified (or the Default SpeechConfiguration)
 
 ## Development Plans
 
 - Export-Speech: Support [Audio Format Info](https://msdn.microsoft.com/en-us/library/ms586885(v=vs.110).aspx)
-- Add support for SSML with the [SpeakSsml](http://www.w3.org/TR/speech-synthesis/) and/or [SpeakSsmlAsync](https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx) methods
+- Add support for SSML with the [SpeakSsml](http://www.w3.org/TR/speech-synthesis/) and/or [SpeakSsmlAsync](https://msdn.microsoft.com/en-us/library/office/hh361578(v=office.14).aspx) methods.  These let you manipulate the voice/reading for better results.
 - [Speech Recognition?](https://gallery.technet.microsoft.com/scriptcenter/Fun-with-PowerShell-and-c59c3d4b#content)
 
 ## Basic Usage Example
