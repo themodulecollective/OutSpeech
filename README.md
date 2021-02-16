@@ -19,7 +19,6 @@ OutSpeech provides the following features:
 1.0.2 License and metadata updates.
 1.0.1 Original release to PSGallery
 
-
 ## How it Works
 
 1. NOTE: Only works on Windows machines right now (no .Net core support for speech synthesis yet).  Import the OutSpeech module into your Windows PowerShell session (if using PowerShell 6.x or 7.x, use the Import-Module parameter -UseWindowsPowerShell).
